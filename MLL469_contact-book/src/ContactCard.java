@@ -9,7 +9,7 @@ import org.json.JSONObject;
  */
 public class ContactCard {
 	private HashMap<String, String> cardProperties;
-	private int hashCodeVal = -1; 
+	private Integer hashCodeVal = null; 
 	
 	private ContactCard() {
 		cardProperties = new HashMap<String, String>();
@@ -17,11 +17,18 @@ public class ContactCard {
 		cardProperties.put("number","No number");
 		cardProperties.put("email","No email");
 		cardProperties.put("address","No address");
+		//	Can easily add new properties, one line each desired field.
 	};
 	
-	public static ContactCard immutableCard(JSONObject jObject) {
+	public static ContactCard immutableCardViaJSON(JSONObject jObject) {
 		ContactCard contact = createEmptyCard();
-		contact.dictionaryToFieldUpdate(jObject);
+		contact.JSONToFieldUpdate(jObject);
+		return contact;
+	}
+	
+	public static ContactCard immutableCardViaMap(HashMap<String, String> map) {
+		ContactCard contact = createEmptyCard();
+		contact.hashmapToFieldUpdate(map);
 		return contact;
 	}
 	
@@ -30,7 +37,7 @@ public class ContactCard {
 		return contact;
 	}
 	
-	private void dictionaryToFieldUpdate(JSONObject jObject) {
+	private void JSONToFieldUpdate(JSONObject jObject) {
 			Iterator<?> keys = jObject.keys();
 			
 			while (keys.hasNext() ) {
@@ -41,6 +48,15 @@ public class ContactCard {
 				}
 			}
 	}
+
+	private void hashmapToFieldUpdate(HashMap<String, String> map) {
+		for (String key : map.keySet() ) {
+			String value = map.get(key);
+			if (this.cardProperties.containsKey(key)) { // Prevents superfluous information in the map making it into the ContactCard data structure. 
+				this.cardProperties.put(key, value); 
+			}
+		}
+}
 	
 	public HashMap<String, String> getProperties() {
 		return cardProperties;
@@ -52,7 +68,7 @@ public class ContactCard {
 		 * Returns a unique code using all of object's fields, used to locate the object in hashmap.
 		 * @return An integer primitive to be used as the object's unique hashcode.
 		 */
-		if (this.hashCodeVal != -1) { 
+		if (this.hashCodeVal != null) { 
 			return hashCodeVal;
 			} // Prevents from rehashing code if already exists. The public points of entry to class only allows new objects, so hashcode does not change. 
 		else {
