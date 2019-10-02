@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/home/ash/eclipse-workspace/MLL469_contact-book/lib/json-20140107.jar"/>
+	<classpathentry kind="lib" path="/home/ash/fun/production_address_book_java/MLL469_contact-book/lib/json-20140107.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

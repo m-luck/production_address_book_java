@@ -1,9 +1,11 @@
 import java.util.HashMap;
-import org.json.simple.JSONObject;
+import java.util.Iterator;
+
+import org.json.JSONObject;
 
 public class ContactBookTool {
 		
-	private HashMap<String, HashMap<String, Integer>> searchMap = new HashMap<String, HashMap<String, Integer>>();
+	private HashMap<String, HashMap<String, ContactCard>> searchMap = new HashMap<String, HashMap<String, ContactCard>>();
 	
 	public ContactBookTool() {
 		
@@ -14,8 +16,16 @@ public class ContactBookTool {
 		return results;
 	}
 	
-	public void addContact(JSONObject jObject){
+	public void addContact(JSONObject updatedInfo){
 		ContactCard contact = ContactCard.createEmptyCard(); 
-		contact.dictionaryToFieldUpdate();
+		contact.dictionaryToFieldUpdate(updatedInfo);
+		
+		Iterator<?> keys = updatedInfo.keys();
+		int hashCode = contact.hashCode();
+		while (keys.hasNext() ) {
+			String key = (String)keys.next();
+			String value = updatedInfo.getString(key);
+			searchMap.put(key, )
+		}
 	}
 }

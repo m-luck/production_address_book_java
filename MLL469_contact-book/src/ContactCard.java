@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Scanner;
+
+import org.json.JSONObject;
 /**
  * 
  * @author Michael Lukiman
@@ -22,15 +22,13 @@ public class ContactCard {
 		return contact;
 	}
 	
-	private void dictionaryToFieldUpdate(HashMap<String, String>) {
-			JSONObject jObject = new JSONObject(dict);
+	public void dictionaryToFieldUpdate(JSONObject jObject) {
 			Iterator<?> keys = jObject.keys();
 			
 			while (keys.hasNext() ) {
 				String key = (String)keys.next();
 				String value = jObject.getString(key);
-				map.put(key, value)
-			}
+				this.cardProperties.put(key, value);
 	}
 	
 	@Override
